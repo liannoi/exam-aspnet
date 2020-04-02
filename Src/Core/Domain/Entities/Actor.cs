@@ -7,8 +7,8 @@ namespace Exam.Domain.Entities
     {
         public Actor()
         {
-            ActorsPhotos = new HashSet<ActorsPhoto>();
-            Films = new HashSet<Film>();
+            ActorsFilms = new HashSet<ActorsFilms>();
+            ActorsPhotos = new HashSet<ActorPhoto>();
         }
 
         public int ActorId { get; set; }
@@ -17,13 +17,11 @@ namespace Exam.Domain.Entities
         public DateTime Birthday { get; set; }
 
         // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
-        // ReSharper disable once MemberCanBePrivate.Global
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public ICollection<ActorsPhoto> ActorsPhotos { get; private set; }
+        // ReSharper disable once CollectionNeverUpdated.Global
+        public ICollection<ActorsFilms> ActorsFilms { get; private set; }
 
         // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
-        // ReSharper disable once MemberCanBePrivate.Global
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public ICollection<Film> Films { get; private set; }
+        // ReSharper disable once CollectionNeverUpdated.Global
+        public ICollection<ActorPhoto> ActorsPhotos { get; private set; }
     }
 }

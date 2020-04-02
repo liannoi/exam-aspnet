@@ -7,9 +7,9 @@ namespace Exam.Domain.Entities
     {
         public Film()
         {
-            FilmsPhotos = new HashSet<FilmsPhoto>();
-            Actors = new HashSet<Actor>();
-            Genres = new HashSet<Genre>();
+            ActorFilms = new HashSet<ActorsFilms>();
+            FilmGenres = new HashSet<FilmsGenres>();
+            FilmsPhotos = new HashSet<FilmPhoto>();
         }
 
         public int FilmId { get; set; }
@@ -20,16 +20,16 @@ namespace Exam.Domain.Entities
         // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
         // ReSharper disable once MemberCanBePrivate.Global
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public ICollection<FilmsPhoto> FilmsPhotos { get; private set; }
+        public ICollection<ActorsFilms> ActorFilms { get; private set; }
 
         // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
         // ReSharper disable once MemberCanBePrivate.Global
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public ICollection<Actor> Actors { get; private set; }
+        public ICollection<FilmsGenres> FilmGenres { get; private set; }
 
         // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
         // ReSharper disable once MemberCanBePrivate.Global
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public ICollection<Genre> Genres { get; private set; }
+        public ICollection<FilmPhoto> FilmsPhotos { get; private set; }
     }
 }

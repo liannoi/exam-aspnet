@@ -6,15 +6,14 @@ namespace Exam.Domain.Entities
     {
         public Genre()
         {
-            Films = new HashSet<Film>();
+            FilmsGenres = new HashSet<FilmsGenres>();
         }
 
         public int GenreId { get; set; }
         public string Title { get; set; }
 
         // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
-        // ReSharper disable once MemberCanBePrivate.Global
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public ICollection<Film> Films { get; private set; }
+        // ReSharper disable once CollectionNeverUpdated.Global
+        public ICollection<FilmsGenres> FilmsGenres { get; private set; }
     }
 }
