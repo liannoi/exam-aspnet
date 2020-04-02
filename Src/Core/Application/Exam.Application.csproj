@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Exceptions\" />
+    <Folder Include="Common\Mappings\" />
+    <Folder Include="Storage\ActorsPhotos\Commands\Create\" />
+    <Folder Include="Storage\ActorsPhotos\Commands\Delete\" />
+    <Folder Include="Storage\ActorsPhotos\Commands\Update\" />
+    <Folder Include="Storage\ActorsPhotos\Queries\Get\" />
+    <Folder Include="Storage\Actors\Commands\Create\" />
+    <Folder Include="Storage\Actors\Commands\Delete\" />
+    <Folder Include="Storage\Actors\Commands\Update\" />
+    <Folder Include="Storage\Actors\Queries\Get\" />
+    <Folder Include="Storage\FilmsPhotos\Commands\Create\" />
+    <Folder Include="Storage\FilmsPhotos\Commands\Delete\" />
+    <Folder Include="Storage\FilmsPhotos\Commands\Update\" />
+    <Folder Include="Storage\FilmsPhotos\Queries\Get\" />
+    <Folder Include="Storage\Films\Commands\Create\" />
+    <Folder Include="Storage\Films\Commands\Delete\" />
+    <Folder Include="Storage\Films\Commands\Update\" />
+    <Folder Include="Storage\Genres\Commands\Create\" />
+    <Folder Include="Storage\Genres\Commands\Delete\" />
+    <Folder Include="Storage\Genres\Commands\Update\" />
+    <Folder Include="Storage\Genres\Queries\Get\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Exam.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
