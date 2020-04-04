@@ -7,25 +7,20 @@
   <ItemGroup>
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Mappings\" />
-    <Folder Include="Storage\ActorsPhotos\Commands\Create\" />
-    <Folder Include="Storage\ActorsPhotos\Commands\Delete\" />
-    <Folder Include="Storage\ActorsPhotos\Commands\Update\" />
-    <Folder Include="Storage\ActorsPhotos\Queries\Get\" />
+    <Folder Include="Storage\ActorsPhotos\Queries\Get\AsList\" />
     <Folder Include="Storage\Actors\Commands\Create\" />
     <Folder Include="Storage\Actors\Commands\Delete\" />
     <Folder Include="Storage\Actors\Commands\Update\" />
-    <Folder Include="Storage\Actors\Queries\Get\" />
-    <Folder Include="Storage\FilmsPhotos\Commands\Create\" />
-    <Folder Include="Storage\FilmsPhotos\Commands\Delete\" />
-    <Folder Include="Storage\FilmsPhotos\Commands\Update\" />
-    <Folder Include="Storage\FilmsPhotos\Queries\Get\" />
-    <Folder Include="Storage\Films\Commands\Create\" />
-    <Folder Include="Storage\Films\Commands\Delete\" />
-    <Folder Include="Storage\Films\Commands\Update\" />
+    <Folder Include="Storage\Actors\Queries\Get\Base\AsList\" />
+    <Folder Include="Storage\Actors\Queries\Get\ByFilm\AsList\" />
+    <Folder Include="Storage\FilmsPhotos\Queries\Get\AsList\" />
+    <Folder Include="Storage\Films\Queries\Get\ByActor\AsList\" />
+    <Folder Include="Storage\Films\Queries\Get\ByGenre\AsList\" />
     <Folder Include="Storage\Genres\Commands\Create\" />
     <Folder Include="Storage\Genres\Commands\Delete\" />
     <Folder Include="Storage\Genres\Commands\Update\" />
-    <Folder Include="Storage\Genres\Queries\Get\" />
+    <Folder Include="Storage\Genres\Queries\Get\Base\AsList\" />
+    <Folder Include="Storage\Genres\Queries\Get\ByFilm\AsList\" />
   </ItemGroup>
 
   <ItemGroup>

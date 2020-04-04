@@ -6,7 +6,7 @@ using Exam.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Exam.Application.Storage.Films.Queries.Get.AsList
+namespace Exam.Application.Storage.Films.Queries.Get.Base.AsList
 {
     public class GetFilmsAsListQuery : IRequest<FilmsListViewModel>
     {
