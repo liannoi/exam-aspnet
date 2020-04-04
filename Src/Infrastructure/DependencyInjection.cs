@@ -7,9 +7,10 @@ namespace Exam.Infrastructure
 {
     public static class DependencyInjection
     {
+        // ReSharper disable once UnusedMethodReturnValue.Global
         public static IServiceCollection AddInfrastructure(this IServiceCollection self)
         {
-            self.AddTransient<IJsonMocksReader<Film>, JsonMocksReader<Film>>();
+            self.AddTransient<IJsonMocksReader<Film>, JsonFilmsMockReader>();
 
             return self;
         }

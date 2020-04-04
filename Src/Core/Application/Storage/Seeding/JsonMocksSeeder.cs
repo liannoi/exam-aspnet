@@ -21,7 +21,7 @@ namespace Exam.Application.Storage.Seeding
         {
             if (_context.Films.Any()) return;
 
-            await SeedMocksAsync(Consts.PathMockFilms, cancellationToken);
+            await SeedMocksAsync(Consts.FilmsMockPath, cancellationToken);
         }
 
         private async Task SeedMocksAsync(string filePath, CancellationToken cancellationToken)

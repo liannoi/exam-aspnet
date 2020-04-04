@@ -7,9 +7,12 @@ using Newtonsoft.Json;
 
 namespace Exam.Infrastructure.MockReaders
 {
-    public class JsonMocksReader<TEntity> : IJsonMocksReader<TEntity> where TEntity : class, new()
+    public abstract class JsonMockReader<TEntity> : IJsonMocksReader<TEntity> where TEntity : class, new()
     {
-        public async Task<IEnumerable<TEntity>> ReadAsync(string filePath, CancellationToken cancellationToken)
+        public abstract Task<IEnumerable<TEntity>> ReadAsync(string filePath, CancellationToken cancellationToken);
+
+        protected async Task<IEnumerable<TEntity>> DeserializeAsync(string filePath,
+            CancellationToken cancellationToken)
         {
             return await await Task.Factory.StartNew(
                 async () => JsonConvert.DeserializeObject<IEnumerable<TEntity>>(
