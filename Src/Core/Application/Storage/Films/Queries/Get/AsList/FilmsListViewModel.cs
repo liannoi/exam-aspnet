@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Exam.Application.Storage.Films.Queries.Get.Base.AsList
+namespace Exam.Application.Storage.Films.Queries.Get.AsList
 {
     public class FilmsListViewModel
     {
