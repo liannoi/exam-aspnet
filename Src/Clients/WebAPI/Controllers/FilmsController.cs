@@ -45,7 +45,7 @@ namespace Exam.Clients.WebApi.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update(UpdateFilmCommand command)

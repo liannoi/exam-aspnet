@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exam.Persistence", "Src\Per
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exam.Clients.WebApi", "Src\Clients\WebAPI\Exam.Clients.WebApi.csproj", "{9CA5C67C-BE40-479E-9073-13112F7AB732}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exam.Clients.WebUI", "Src\Clients\WebUI\Exam.Clients.WebUI.csproj", "{34335F88-1E4F-493B-B66B-F707E2EC98AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{9CA5C67C-BE40-479E-9073-13112F7AB732}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CA5C67C-BE40-479E-9073-13112F7AB732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CA5C67C-BE40-479E-9073-13112F7AB732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34335F88-1E4F-493B-B66B-F707E2EC98AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34335F88-1E4F-493B-B66B-F707E2EC98AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34335F88-1E4F-493B-B66B-F707E2EC98AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34335F88-1E4F-493B-B66B-F707E2EC98AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{2094A04E-4CA0-4FF3-9E19-FB0A9F88F3B9} = {99E2E88C-67B8-4148-A406-1B4F4A8A98DA}
 		{498657F6-2A48-4721-AE4D-43814071C472} = {99E2E88C-67B8-4148-A406-1B4F4A8A98DA}
 		{9CA5C67C-BE40-479E-9073-13112F7AB732} = {5B32103E-EC77-40D2-99CC-5DE9C8299C41}
+		{34335F88-1E4F-493B-B66B-F707E2EC98AD} = {5B32103E-EC77-40D2-99CC-5DE9C8299C41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E938145-EDBD-4DC8-BCFA-00934E3E571F}

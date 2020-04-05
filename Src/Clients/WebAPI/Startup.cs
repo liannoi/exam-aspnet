@@ -27,6 +27,14 @@ namespace Exam.Clients.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // TODO: Policy name to local Consts.cs.
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
             services.AddInfrastructure();
             services.AddPersistence(Configuration);
             services.AddApplication();
@@ -49,17 +57,14 @@ namespace Exam.Clients.WebApi
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
             app.UseHealthChecks("/health");
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            // TODO: Policy name to local Consts.cs.
+            app.UseCors("MyPolicy");
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }

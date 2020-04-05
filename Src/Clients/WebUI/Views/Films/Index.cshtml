@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Exam.Clients.WebUI.Common.Models.Returnable.Film.FilmReturnModel>
+
+@{
+    ViewData["Title"] = "Films";
+}
+
+<div class="row mb-3">
+    <div class="col-md-12">
+        <h2>Films</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-2">
+        <a class="btn btn-success" asp-controller="Films" asp-action="CreateOrUpdate" asp-route-id="0">New...</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                    @{
+                        const int titleTrimLength = 32;
+                        var shortTitle = item.Title.Length > titleTrimLength ? $"{item.Title.Substring(0, titleTrimLength)}..." : item.Title;
+                    }
+                    @shortTitle
+                    <td>@item.PublishYear.ToShortDateString()</td>
+                    <td>
+                        @{
+                            const int descriptionTrimLength = 64;
+                            var shortDescription = string.IsNullOrEmpty(item.Description) ? "(Empty)" : item.Description.Length > descriptionTrimLength ? $"{item.Description.Substring(0, descriptionTrimLength)}..." : item.Description;
+                        }
+                        @shortDescription
+                    </td>
+                    <td>
+                        <a class="btn btn-secondary" asp-controller="Films" asp-action="CreateOrUpdate" asp-route-id="@item.FilmId">Edit...</a>
+                        <a data-id="@item.FilmId" class="btn btn-outline-danger btn-cmd-delete" asp-controller="Films" asp-action="Delete">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="~/js/softDeleter.js"></script>
+    <script src="~/js/films-index.js"></script>
+}
