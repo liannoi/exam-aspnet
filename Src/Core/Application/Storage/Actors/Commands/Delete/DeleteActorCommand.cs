@@ -29,8 +29,6 @@ namespace Exam.Application.Storage.Actors.Commands.Delete
                     .Where(e => e.ActorId == request.ActorId)
                     .FirstOrDefaultAsync(cancellationToken);
 
-                // TODO: Improve this logic, realizing the fact that the film has the connecting factors: photos, actors and genres. When deleting a film or connecting factors, (you must also request a “deletion mode” or automatic)? - in which we will remove the binders immediately, or manual - in which the removal will be manually a new request.
-
                 _context.Actors.Remove(fined);
                 await _context.SaveChangesAsync(cancellationToken);
 

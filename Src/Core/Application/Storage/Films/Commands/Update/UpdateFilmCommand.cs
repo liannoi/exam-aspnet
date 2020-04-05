@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Exam.Application.Common.Interfaces;
+using Exam.Application.Storage.Actors;
+using Exam.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +19,7 @@ namespace Exam.Application.Storage.Films.Commands.Update
         public DateTime PublishYear { get; set; }
         public string Description { get; set; }
 
-        // TODO: Add only after the start of the client description on MVC. There will be three collections of connecting factors, and when we transfer an empty collection (on the client we display through "(Nope)" and a static photo for the absence of a photo) - that means we skip adding in the Handle method (add checks for all three collections there).
+        public IEnumerable<ActorLookupDto> Actors { get; set; }
 
         public class UpdateFilmCommandHandler : IRequestHandler<UpdateFilmCommand, FilmLookupDto>
         {
@@ -39,9 +42,25 @@ namespace Exam.Application.Storage.Films.Commands.Update
                 fined.PublishYear = request.PublishYear;
                 fined.Description = request.Description;
                 _context.Films.Update(fined);
+                await ClearActorsInFilmAsync(fined, request, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return _mapper.Map<FilmLookupDto>(fined);
+            }
+
+            private async Task ClearActorsInFilmAsync(Film film, UpdateFilmCommand request,
+                CancellationToken cancellationToken)
+            {
+                if (!request.Actors.Any()) return;
+
+                _context.ActorsFilms
+                    .Where(e => e.FilmId == request.FilmId)
+                    .ToList()
+                    .ForEach(e => { _context.ActorsFilms.Remove(e); });
+
+                foreach (var actor in request.Actors)
+                    await _context.ActorsFilms
+                        .AddAsync(new ActorsFilms {FilmId = film.FilmId, ActorId = actor.ActorId}, cancellationToken);
             }
         }
     }

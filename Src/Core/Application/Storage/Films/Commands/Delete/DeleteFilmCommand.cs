@@ -29,12 +29,20 @@ namespace Exam.Application.Storage.Films.Commands.Delete
                     .Where(e => e.FilmId == request.FilmId)
                     .FirstOrDefaultAsync(cancellationToken);
 
-                // TODO: Improve this logic, realizing the fact that the film has the connecting factors: photos, actors and genres. When deleting a film or connecting factors, (you must also request a “deletion mode” or automatic)? - in which we will remove the binders immediately, or manual - in which the removal will be manually a new request.
-
+                await ClearActorsInFilmAsync(request, cancellationToken);
                 _context.Films.Remove(fined);
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return _mapper.Map<FilmLookupDto>(fined);
+            }
+
+            private async Task ClearActorsInFilmAsync(DeleteFilmCommand request, CancellationToken cancellationToken)
+            {
+                var actorsInFilms = _context.ActorsFilms.Where(e => e.FilmId == request.FilmId);
+                foreach (var item in actorsInFilms)
+                    _context.ActorsFilms.Remove(item);
+
+                await _context.SaveChangesAsync(cancellationToken);
             }
         }
     }

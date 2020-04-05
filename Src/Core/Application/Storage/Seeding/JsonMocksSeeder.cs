@@ -9,25 +9,26 @@ namespace Exam.Application.Storage.Seeding
     public class JsonMocksSeeder
     {
         private readonly IFilmsDbContext _context;
+        private readonly IJsonMocksReader<Actor> _mockActors;
         private readonly IJsonMocksReader<Film> _mockFilms;
 
-        public JsonMocksSeeder(IFilmsDbContext context, IJsonMocksReader<Film> mockFilms)
+        public JsonMocksSeeder(IFilmsDbContext context, IJsonMocksReader<Film> mockFilms,
+            IJsonMocksReader<Actor> mockActors)
         {
             _context = context;
             _mockFilms = mockFilms;
+            _mockActors = mockActors;
         }
 
         public async Task SeedAllAsync(CancellationToken cancellationToken)
         {
-            if (_context.Films.Any()) return;
+            if (!_context.Films.Any())
+                await _context.Films.AddRangeAsync(await _mockFilms.ReadAsync(Consts.FilmsMockPath, cancellationToken),
+                    cancellationToken);
 
-            await SeedMocksAsync(Consts.FilmsMockPath, cancellationToken);
-        }
-
-        private async Task SeedMocksAsync(string filePath, CancellationToken cancellationToken)
-        {
-            await _context.Films.AddRangeAsync(
-                await _mockFilms.ReadAsync(filePath, cancellationToken), cancellationToken);
+            if (!_context.Actors.Any())
+                await _context.Actors.AddRangeAsync(
+                    await _mockActors.ReadAsync(Consts.ActorsMockPath, cancellationToken), cancellationToken);
 
             await _context.SaveChangesAsync(cancellationToken);
         }

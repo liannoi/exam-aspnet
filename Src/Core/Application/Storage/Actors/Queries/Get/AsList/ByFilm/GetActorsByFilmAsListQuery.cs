@@ -3,9 +3,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Exam.Application.Common.Interfaces;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Exam.Application.Storage.Actors.Queries.Get.AsList.ByFilm
 {
@@ -30,14 +30,11 @@ namespace Exam.Application.Storage.Actors.Queries.Get.AsList.ByFilm
             {
                 var selected = new List<ActorLookupDto>();
 
-                await _context.ActorsFilms
-                    .Where(e => e.FilmId == request.FilmId)
-                    .ForEachAsync(async e =>
-                    {
-                        selected.Add(_mapper.Map<ActorLookupDto>(await _context.Actors
-                            .Where(x => x.ActorId == e.ActorId)
-                            .FirstOrDefaultAsync(cancellationToken)));
-                    }, cancellationToken);
+                var collection = _context.ActorsFilms.Where(e => e.FilmId == request.FilmId);
+                foreach (var item in collection)
+                    selected.Add(_context.Actors
+                        .ProjectTo<ActorLookupDto>(_mapper.ConfigurationProvider)
+                        .FirstOrDefault(e => e.ActorId == item.ActorId));
 
                 return new ActorsListViewModel
                     {Actors = selected.GroupBy(x => x.ActorId).Select(x => x.FirstOrDefault()).ToList()};
