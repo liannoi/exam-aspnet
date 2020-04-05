@@ -7,11 +7,6 @@
   <ItemGroup>
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Mappings\" />
-    <Folder Include="Storage\ActorsPhotos\Queries\Get\AsList\" />
-    <Folder Include="Storage\FilmsPhotos\Queries\Get\AsList\" />
-    <Folder Include="Storage\Genres\Commands\Create\" />
-    <Folder Include="Storage\Genres\Commands\Delete\" />
-    <Folder Include="Storage\Genres\Commands\Update\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,7 +6,7 @@ using Exam.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Exam.Application.Storage.Actors.Queries.Get.AsList.Core
+namespace Exam.Application.Storage.Actors.Queries.Get.AsList
 {
     public class GetActorsAsListQuery : IRequest<ActorsListViewModel>
     {
