@@ -1,0 +1,53 @@
+﻿@model Exam.Clients.WebUI.Common.Models.ViewModels.VotingViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="row mb-3">
+    <div class="col-md-12">
+        <h2>@Model.Name</h2>
+        <small class="text-muted">Anonymous voting for all users</small>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            @foreach (var item in Model.VotingAnswers)
+            {
+                <div class="form-row mb-2 votingCheckBox">
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" data-id="@item.VotingAnswerId" disabled>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" disabled value="@item.Text">
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="form-row mt-4">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <small class="text-muted">@Model.VotingCount votes</small>
+                        <input type="button" value="Vote" class="btn btn-success float-right pt-2 pb-2 pl-3 pr-3 btn-cmd-vote"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/css/home-index.css" rel="stylesheet"/>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="~/js/home-index.js"></script>
+}

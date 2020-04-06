@@ -11,6 +11,7 @@ namespace Exam.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection self)
         {
             self.AddTransient<IJsonMocksReader<Film>, JsonFilmsMockReader>();
+            self.AddTransient<IJsonMocksReader<Actor>, JsonActorsMockReader>();
 
             return self;
         }

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Exam.Clients.WebUI.Common.Models.Returnable.Actor.ActorReturnModel>
+
+@{
+    ViewData["Title"] = "Actors";
+}
+
+<div class="row mb-3">
+    <div class="col-md-12">
+        <h2>Actors</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-2">
+        <a asp-controller="Actors" asp-action="CreateOrUpdate" asp-route-id="0" class="btn btn-success">New...</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="offset-md-2"></div>
+    <div class="col-md-8">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th>First Name
+                <th>Last Name</th>
+                <th>Birthday</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Birthday.ToShortDateString()</td>
+                    <td>
+                        <a class="btn btn-secondary" asp-controller="Actors" asp-action="CreateOrUpdate" asp-route-id="@item.ActorId">Edit...</a>
+                        <a data-id="@item.ActorId" class="btn btn-outline-danger btn-cmd-delete" asp-controller="Actors" asp-action="Delete">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="offset-md-2"></div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="~/js/softDeleter.js"></script>
+    <script src="~/js/actors-index.js"></script>
+}

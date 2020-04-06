@@ -1,0 +1,10 @@
+﻿.textarea { border: 1px solid #EBEBEB; }
+
+.textarea {
+    max-height: 250px;
+    max-width: 100%;
+    min-height: 110px;
+    min-width: 100%;
+}
+
+.textarea:hover { box-shadow: 0 10px 25px -5px rgba(247, 247, 247, 0.79); }

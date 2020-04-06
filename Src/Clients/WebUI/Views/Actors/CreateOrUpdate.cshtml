@@ -1,0 +1,70 @@
+﻿@model Exam.Clients.WebUI.Common.Models.ViewModels.CreateOrUpdateActorViewModel
+
+@{
+    ViewData["Title"] = "Create or update";
+}
+
+<div class="row mb-3">
+    <div class="col-md-12">
+        <h2>Create or update actor</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-12">
+        <form asp-action="CreateOrUpdate">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @Html.HiddenFor(model => model.Actor.ActorId)
+
+            <div class="form-row">
+                <div class="col-md-4 mr-5">
+                    <div class="form-group">
+                        <input asp-for="Actor.FirstName" class="form-control mb-4" placeholder="First Name"/>
+                        <span asp-validation-for="Actor.FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input asp-for="Actor.LastName" class="form-control mb-4" placeholder="Last Name"/>
+                        <span asp-validation-for="Actor.LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Actor.Birthday"></label>
+                        <input asp-for="Actor.Birthday" class="form-control mb-4"/>
+                        <span asp-validation-for="Actor.Birthday" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" asp-for="IsNopeFilms">
+                        <label class="custom-control-label" asp-for="IsNopeFilms">Don't specify films.</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SelectedFilms, "Films")
+                        @Html.ListBoxFor(model => model.SelectedFilms, Model.Films, new {@class = "form-control", size = "7"})
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Save" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="~/js/blur.js"></script>
+    <script src="~/js/actors-createOrUpdate.js"></script>
+}

@@ -10,7 +10,6 @@ namespace Exam.Application.Storage.Films.Queries.Get.AsList
 {
     public class GetFilmsAsListQuery : IRequest<FilmsListViewModel>
     {
-        // ReSharper disable once UnusedType.Global
         public class GetFilmsAsListQueryHandler : IRequestHandler<GetFilmsAsListQuery, FilmsListViewModel>
         {
             private readonly IFilmsDbContext _context;
