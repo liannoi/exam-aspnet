@@ -6,6 +6,7 @@ using Exam.Application.Storage.Films.Commands.Delete;
 using Exam.Application.Storage.Films.Commands.Update;
 using Exam.Application.Storage.Films.Queries.Get;
 using Exam.Application.Storage.Films.Queries.Get.AsList;
+using Exam.Application.Storage.Films.Queries.Get.AsList.ByActor;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,14 @@ namespace Exam.Clients.WebApi.Controllers
         public async Task<ActionResult<FilmLookupDto>> Get(int id)
         {
             return Ok(await Mediator.Send(new GetFilmQuery {Id = id}));
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<FilmsListViewModel>> GetAllByActor(int id)
+        {
+            return Ok(await Mediator.Send(new GetFilmsByActorAsListQuery {ActorId = id}));
         }
 
         [HttpPost]

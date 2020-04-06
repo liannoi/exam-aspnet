@@ -10,5 +10,6 @@ namespace Exam.Clients.WebUI.Common.Models.ViewModels
 
         public IEnumerable<int> SelectedFilms { get; set; }
         public IEnumerable<SelectListItem> Films { get; set; }
+        public bool IsNopeFilms { get; set; }
     }
 }

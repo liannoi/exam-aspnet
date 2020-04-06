@@ -29,10 +29,23 @@ namespace Exam.Application.Storage.Actors.Commands.Delete
                     .Where(e => e.ActorId == request.ActorId)
                     .FirstOrDefaultAsync(cancellationToken);
 
+                #region Work with dependencies
+
+                await ClearFilmsInActorAsync(request, cancellationToken);
+
+                #endregion
+
                 _context.Actors.Remove(fined);
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return _mapper.Map<ActorLookupDto>(fined);
+            }
+
+            private async Task ClearFilmsInActorAsync(DeleteActorCommand request, CancellationToken cancellationToken)
+            {
+                var filmsInActor = _context.ActorsFilms.Where(e => e.ActorId == request.ActorId);
+                foreach (var item in filmsInActor) _context.ActorsFilms.Remove(item);
+                await _context.SaveChangesAsync(cancellationToken);
             }
         }
     }

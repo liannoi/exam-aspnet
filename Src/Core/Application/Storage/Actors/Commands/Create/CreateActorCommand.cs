@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Exam.Application.Common.Interfaces;
+using Exam.Application.Storage.Films;
 using Exam.Domain.Entities;
 using MediatR;
 
@@ -13,6 +16,8 @@ namespace Exam.Application.Storage.Actors.Commands.Create
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime Birthday { get; set; }
+
+        public IEnumerable<FilmLookupDto> Films { get; set; }
 
         public class CreateActorCommandHandler : IRequestHandler<CreateActorCommand, ActorLookupDto>
         {
@@ -36,7 +41,25 @@ namespace Exam.Application.Storage.Actors.Commands.Create
 
                 await _context.SaveChangesAsync(cancellationToken);
 
+                #region Work with dependencies
+
+                await AddFilmsInActorAsync(result.Entity, request, cancellationToken);
+
+                #endregion
+
                 return _mapper.Map<ActorLookupDto>(result.Entity);
+            }
+
+            private async Task AddFilmsInActorAsync(Actor actor, CreateActorCommand request,
+                CancellationToken cancellationToken)
+            {
+                if (!request.Films.Any()) return;
+
+                foreach (var film in request.Films)
+                    await _context.ActorsFilms
+                        .AddAsync(new ActorsFilms {FilmId = film.FilmId, ActorId = actor.ActorId}, cancellationToken);
+
+                await _context.SaveChangesAsync(cancellationToken);
             }
         }
     }

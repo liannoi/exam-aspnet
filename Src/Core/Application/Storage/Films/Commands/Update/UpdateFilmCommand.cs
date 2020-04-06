@@ -42,21 +42,27 @@ namespace Exam.Application.Storage.Films.Commands.Update
                 fined.PublishYear = request.PublishYear;
                 fined.Description = request.Description;
                 _context.Films.Update(fined);
-                await ClearActorsInFilmAsync(fined, request, cancellationToken);
+
+                #region Work with dependencies
+
+                await UpdateActorsInFilmAsync(fined, request, cancellationToken);
+
+                #endregion
+
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return _mapper.Map<FilmLookupDto>(fined);
             }
 
-            private async Task ClearActorsInFilmAsync(Film film, UpdateFilmCommand request,
+            private async Task UpdateActorsInFilmAsync(Film film, UpdateFilmCommand request,
                 CancellationToken cancellationToken)
             {
-                if (!request.Actors.Any()) return;
-
                 _context.ActorsFilms
                     .Where(e => e.FilmId == request.FilmId)
                     .ToList()
                     .ForEach(e => { _context.ActorsFilms.Remove(e); });
+
+                if (!request.Actors.Any()) return;
 
                 foreach (var actor in request.Actors)
                     await _context.ActorsFilms

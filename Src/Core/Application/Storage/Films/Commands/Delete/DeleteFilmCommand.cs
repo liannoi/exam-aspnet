@@ -29,7 +29,12 @@ namespace Exam.Application.Storage.Films.Commands.Delete
                     .Where(e => e.FilmId == request.FilmId)
                     .FirstOrDefaultAsync(cancellationToken);
 
+                #region Work with dependencies
+
                 await ClearActorsInFilmAsync(request, cancellationToken);
+
+                #endregion
+
                 _context.Films.Remove(fined);
                 await _context.SaveChangesAsync(cancellationToken);
 
@@ -39,9 +44,7 @@ namespace Exam.Application.Storage.Films.Commands.Delete
             private async Task ClearActorsInFilmAsync(DeleteFilmCommand request, CancellationToken cancellationToken)
             {
                 var actorsInFilms = _context.ActorsFilms.Where(e => e.FilmId == request.FilmId);
-                foreach (var item in actorsInFilms)
-                    _context.ActorsFilms.Remove(item);
-
+                foreach (var item in actorsInFilms) _context.ActorsFilms.Remove(item);
                 await _context.SaveChangesAsync(cancellationToken);
             }
         }

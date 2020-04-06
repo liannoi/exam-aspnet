@@ -10,5 +10,6 @@ namespace Exam.Clients.WebUI.Common.Models.ViewModels
 
         public IEnumerable<int> SelectedActors { get; set; }
         public IEnumerable<SelectListItem> Actors { get; set; }
+        public bool IsNopeActors { get; set; }
     }
 }

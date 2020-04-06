@@ -40,12 +40,17 @@ namespace Exam.Application.Storage.Films.Commands.Create
                 }, cancellationToken);
 
                 await _context.SaveChangesAsync(cancellationToken);
-                await ClearActorsInFilmAsync(result.Entity, request, cancellationToken);
+
+                #region Work with dependencies
+
+                await AddActorsInFilmAsync(result.Entity, request, cancellationToken);
+
+                #endregion
 
                 return _mapper.Map<FilmLookupDto>(result.Entity);
             }
 
-            private async Task ClearActorsInFilmAsync(Film film, CreateFilmCommand request,
+            private async Task AddActorsInFilmAsync(Film film, CreateFilmCommand request,
                 CancellationToken cancellationToken)
             {
                 if (!request.Actors.Any()) return;

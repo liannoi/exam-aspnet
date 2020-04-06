@@ -95,6 +95,10 @@ namespace Exam.Clients.WebUI.Controllers
         private async Task<IEnumerable<ActorReturnModel>> FetchSelectedActorsAsync(CreateOrUpdateFilmViewModel model)
         {
             var actors = new List<ActorReturnModel>();
+
+            if (model.IsNopeActors) return actors;
+            if (model.SelectedActors == null) return actors;
+
             foreach (var selectedActorId in model.SelectedActors)
                 actors.Add(await _apiTools.FetchAsync<ActorReturnModel>(
                     $"https://localhost:5001/api/actors/get/{selectedActorId}"));

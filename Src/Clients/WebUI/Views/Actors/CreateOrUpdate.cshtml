@@ -38,14 +38,14 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-5">
                     <div class="custom-control custom-checkbox mb-3">
-                        <input type="checkbox" class="custom-control-input" id="actor_films_nope" disabled="disabled">
-                        <label class="custom-control-label" for="actor_films_nope" disabled="disabled">Don't specify films.</label>
+                        <input type="checkbox" class="custom-control-input" asp-for="IsNopeFilms">
+                        <label class="custom-control-label" asp-for="IsNopeFilms">Don't specify films.</label>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.SelectedFilms, "Films [DISABLED]")
-                        @Html.ListBoxFor(model => model.SelectedFilms, Model.Films, new {@class = "form-control"})
+                        @Html.LabelFor(model => model.SelectedFilms, "Films")
+                        @Html.ListBoxFor(model => model.SelectedFilms, Model.Films, new {@class = "form-control", size = "7"})
                     </div>
                 </div>
             </div>
@@ -65,4 +65,6 @@
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="~/js/blur.js"></script>
+    <script src="~/js/actors-createOrUpdate.js"></script>
 }
