@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - Exam</title>
+    <title>@ViewData["Title"] - Voting System (Exam)</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
     @RenderSection("Styles", false)
@@ -13,14 +13,15 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Exam</a>
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Voting System</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
+
+            <div class="navbar-collapse collapse d-sm-inline-flex">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Films" asp-action="Index">Films</a>
                     </li>
@@ -31,6 +32,13 @@
                         <a class="nav-link disabled" asp-controller="Genres" asp-action="Index">Genres</a>
                     </li>
                 </ul>
+
+                @*<ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Right-side</a>
+                    </li>
+                </ul>*@
+
             </div>
 
         </div>

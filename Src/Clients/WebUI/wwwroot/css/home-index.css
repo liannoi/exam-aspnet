@@ -1,0 +1,10 @@
+﻿.form-control:disabled {
+    background-color: transparent;
+    border-left: none;
+}
+
+.input-group-text { background-color: transparent; }
+
+.input-group { transition: .6s; }
+
+.input-group:hover { box-shadow: 0 10px 21px -5px rgba(240, 240, 240, 0.79) inset; }

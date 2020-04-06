@@ -180,6 +180,89 @@ namespace Exam.Persistence.Migrations
                 b.ToTable("Genres");
             });
 
+            modelBuilder.Entity("Exam.Domain.Entities.Voting", b =>
+            {
+                b.Property<int>("VotingId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(512)")
+                    .HasMaxLength(512);
+
+                b.HasKey("VotingId");
+
+                b.HasIndex("Name")
+                    .IsUnique()
+                    .HasName("UNQ_Voting_Name");
+
+                b.ToTable("Voting");
+            });
+
+            modelBuilder.Entity("Exam.Domain.Entities.VotingAnswers", b =>
+            {
+                b.Property<int>("VotingAnswerId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<string>("Text")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(512)")
+                    .HasMaxLength(512);
+
+                b.Property<int>("VotingId")
+                    .HasColumnType("int");
+
+                b.HasKey("VotingAnswerId");
+
+                b.HasIndex("VotingId");
+
+                b.ToTable("VotingAnswers");
+            });
+
+            modelBuilder.Entity("Exam.Domain.Entities.VotingPolle", b =>
+            {
+                b.Property<int>("VotingPolleId")
+                    .HasColumnType("int");
+
+                b.HasKey("VotingPolleId");
+
+                b.ToTable("VotingPolle");
+            });
+
+            modelBuilder.Entity("Exam.Domain.Entities.VotingPolles", b =>
+            {
+                b.Property<int>("VotingPolleId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<int>("PolleId")
+                    .HasColumnType("int");
+
+                b.Property<int>("VotingAnswerId")
+                    .HasColumnType("int");
+
+                b.Property<int>("VotingId")
+                    .HasColumnType("int");
+
+                b.HasKey("VotingPolleId");
+
+                b.HasIndex("PolleId");
+
+                b.HasIndex("VotingAnswerId");
+
+                b.HasIndex("VotingId");
+
+                b.ToTable("VotingPolles");
+            });
+
             modelBuilder.Entity("Exam.Domain.Entities.ActorPhoto", b =>
             {
                 b.HasOne("Exam.Domain.Entities.Actor", "Actor")
@@ -225,6 +308,36 @@ namespace Exam.Persistence.Migrations
                     .WithMany("FilmsGenres")
                     .HasForeignKey("GenreId")
                     .HasConstraintName("FK_FilmsGenres_GenreId")
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity("Exam.Domain.Entities.VotingAnswers", b =>
+            {
+                b.HasOne("Exam.Domain.Entities.Voting", "Voting")
+                    .WithMany("VotingAnswers")
+                    .HasForeignKey("VotingId")
+                    .HasConstraintName("FK_VotingAnswers_VotingId")
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity("Exam.Domain.Entities.VotingPolles", b =>
+            {
+                b.HasOne("Exam.Domain.Entities.VotingPolle", "Polle")
+                    .WithMany("VotingPolles")
+                    .HasForeignKey("PolleId")
+                    .HasConstraintName("FK_VotingPolles_PolleId")
+                    .IsRequired();
+
+                b.HasOne("Exam.Domain.Entities.VotingAnswers", "VotingAnswer")
+                    .WithMany("VotingPolles")
+                    .HasForeignKey("VotingAnswerId")
+                    .HasConstraintName("FK_VotingPolles_VotingAnswerId")
+                    .IsRequired();
+
+                b.HasOne("Exam.Domain.Entities.Voting", "Voting")
+                    .WithMany("VotingPolles")
+                    .HasForeignKey("VotingId")
+                    .HasConstraintName("FK_VotingPolles_VotingId")
                     .IsRequired();
             });
 #pragma warning restore 612, 618

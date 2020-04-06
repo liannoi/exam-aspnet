@@ -14,6 +14,10 @@ namespace Exam.Application.Common.Interfaces
         DbSet<FilmsGenres> FilmsGenres { get; set; }
         DbSet<FilmPhoto> FilmPhotos { get; set; }
         DbSet<Genre> Genres { get; set; }
+        DbSet<Voting> Voting { get; set; }
+        DbSet<VotingAnswer> VotingAnswers { get; set; }
+        DbSet<VotingPolle> VotingPolle { get; set; }
+        DbSet<VotingPolleRelation> VotingPolles { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
